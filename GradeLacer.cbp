@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="GradeLacer" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/GradeLacer" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-std=c++11" />
+					<Add option="-g" />
+					<Add directory="Model" />
+					<Add directory="../GradeLacer" />
+					<Add directory="Utils" />
+					<Add directory="View" />
+					<Add directory="./" />
+				</Compiler>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="`fltk-config --cxxflags`" />
+		</Compiler>
+		<Linker>
+			<Add option="`fltk-config --ldstaticflags`" />
+		</Linker>
+		<Unit filename="InterlacedStudentList.cpp" />
+		<Unit filename="Model/InterlacedStudentList.cpp" />
+		<Unit filename="Model/InterlacedStudentList.h" />
+		<Unit filename="Model/Student.cpp" />
+		<Unit filename="Model/Student.h" />
+		<Unit filename="Model/StudentNode.cpp" />
+		<Unit filename="Model/StudentNode.h" />
+		<Unit filename="Utils/Utils.cpp" />
+		<Unit filename="Utils/Utils.h" />
+		<Unit filename="View/AddStudentWindow.cpp" />
+		<Unit filename="View/AddStudentWindow.h" />
+		<Unit filename="View/ClassRosterWindow.cpp" />
+		<Unit filename="View/ClassRosterWindow.h" />
+		<Unit filename="View/DeleteStudentWindow.cpp" />
+		<Unit filename="View/DeleteStudentWindow.h" />
+		<Unit filename="View/OKCancelWindow.cpp" />
+		<Unit filename="View/OKCancelWindow.h" />
+		<Unit filename="main.cpp" />
+		<Extensions>
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
