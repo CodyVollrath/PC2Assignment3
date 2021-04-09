@@ -2,9 +2,6 @@
 #define STUDENTNODE_H
 #include "Student.h"
 
-#include <string>
-using namespace std;
-
 namespace model
 {
 class StudentNode

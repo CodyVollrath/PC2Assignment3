@@ -8,7 +8,6 @@ class InterlacedStudentList
     public:
         InterlacedStudentList();
         virtual ~InterlacedStudentList();
-
     protected:
 
     private:
