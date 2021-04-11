@@ -310,8 +310,7 @@ void ClassRosterWindow::setSortOrderBasedOnSelection()
 
 void ClassRosterWindow::loadFileData()
 {
-    string value = this->controllerInstance->getFileData(this->getFilename());
-    cout << value << endl;
+    this->controllerInstance->createStudentCollection(this->getFilename());
 }
 //
 // Sets the summary test to display in the class roster summary output

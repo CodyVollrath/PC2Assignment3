@@ -10,8 +10,9 @@ CSVParser::~CSVParser()
     //dtor
 }
 
-InterlacedStudentList CSVParser::getLinkedList(const string& csvData) const
+vector<Student> CSVParser::getStudents(const string& csvData) const
 {
+    vector<Student> students;
     vector<string> lines = splitStr(csvData, "\n");
     for (vector<string>::size_type i = 0; i < lines.size()-1; i++) {
         vector<string> field = splitStr(lines[i], ",");
@@ -25,8 +26,9 @@ InterlacedStudentList CSVParser::getLinkedList(const string& csvData) const
         string gradeStr = field[3];
         int grade = stoi(gradeStr);
         Student student(firstName, lastName, classification, grade);
-        cout << firstName << " " << lastName << " " << classification << " " << grade << endl;
+        students.push_back(student);
     }
+    return students;
 }
 
 Student::Classification CSVParser::getClassification(const string& classification) const

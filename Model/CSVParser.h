@@ -18,8 +18,7 @@ class CSVParser
     public:
         CSVParser();
         virtual ~CSVParser();
-        InterlacedStudentList getLinkedList(const string& csvData) const;
-
+        vector<Student> getStudents(const string& csvData) const;
 
     protected:
 

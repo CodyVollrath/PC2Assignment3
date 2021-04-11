@@ -17,12 +17,13 @@ class GradeLacerController
     public:
         GradeLacerController();
         virtual ~GradeLacerController();
-        string getFileData(const string& fileName) const;
+        void createStudentCollection(const string& fileName) const;
 
     protected:
 
     private:
         CSVParser* parser;
+        vector<Student>* students;
 };
 }
 

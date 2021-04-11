@@ -5,19 +5,26 @@ namespace controller
 GradeLacerController::GradeLacerController()
 {
     this->parser = new CSVParser();
+    this->students = 0;
 }
 
 GradeLacerController::~GradeLacerController()
 {
-    //dtor
+    if (this->parser) {
+        delete this->parser;
+    }
+    if (this->students) {
+        delete this->students;
+    }
+    this->parser = 0;
+    this->students = 0;
 }
 
-string GradeLacerController::getFileData(const string& fileName) const
+void GradeLacerController::createStudentCollection(const string& fileName) const
 {
     FileLoader loader(fileName);
     string csvData = loader.loadFile();
-    this->parser->getLinkedList(csvData);
-    return "";
+    vector<Student> values(this->parser->getStudents(csvData));
 }
 }
 
