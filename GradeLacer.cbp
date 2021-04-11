@@ -19,6 +19,8 @@
 					<Add directory="Utils" />
 					<Add directory="View" />
 					<Add directory="./" />
+					<Add directory="controller" />
+					<Add directory="datatier" />
 				</Compiler>
 			</Target>
 		</Build>
@@ -28,7 +30,8 @@
 		<Linker>
 			<Add option="`fltk-config --ldstaticflags`" />
 		</Linker>
-		<Unit filename="InterlacedStudentList.cpp" />
+		<Unit filename="Model/CSVParser.cpp" />
+		<Unit filename="Model/CSVParser.h" />
 		<Unit filename="Model/InterlacedStudentList.cpp" />
 		<Unit filename="Model/InterlacedStudentList.h" />
 		<Unit filename="Model/Student.cpp" />
@@ -45,6 +48,12 @@
 		<Unit filename="View/DeleteStudentWindow.h" />
 		<Unit filename="View/OKCancelWindow.cpp" />
 		<Unit filename="View/OKCancelWindow.h" />
+		<Unit filename="controller/GradeLacerController.cpp" />
+		<Unit filename="controller/GradeLacerController.h" />
+		<Unit filename="datatier/FileLoader.cpp" />
+		<Unit filename="datatier/FileLoader.h" />
+		<Unit filename="datatier/FileSaver.cpp" />
+		<Unit filename="datatier/FileSaver.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />

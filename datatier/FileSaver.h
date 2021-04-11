@@ -1,7 +1,10 @@
 #ifndef FILESAVER_H
 #define FILESAVER_H
 
-namespace model
+#include <string>
+using namespace std;
+
+namespace datatier
 {
 class FileSaver
 {

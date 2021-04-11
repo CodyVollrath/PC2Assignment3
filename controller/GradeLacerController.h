@@ -1,17 +1,28 @@
 #ifndef GRADELACERCONTROLLER_H
 #define GRADELACERCONTROLLER_H
 
-namespace model
+#include <string>
+using namespace std;
+
+#include "FileLoader.h"
+using namespace datatier;
+
+#include "CSVParser.h"
+using namespace model;
+
+namespace controller
 {
 class GradeLacerController
 {
     public:
         GradeLacerController();
         virtual ~GradeLacerController();
+        string getFileData(const string& fileName) const;
 
     protected:
 
     private:
+        CSVParser* parser;
 };
 }
 

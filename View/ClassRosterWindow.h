@@ -14,6 +14,12 @@
 #include <string>
 using namespace std;
 
+#include "FileLoader.h"
+using namespace datatier;
+
+#include "GradeLacerController.h"
+using namespace controller;
+
 namespace view
 {
 
@@ -27,12 +33,11 @@ public:
     // Defines the sorting methods that can be used to sort the class roster
     //
     enum SortOrder {NAME_ASCENDING, NAME_DESCENDING, CLASSIFICATION_ASCENDING, CLASSIFICATION_DESCENDING, GRADE_ASCENDING, GRADE_DESCENDING};
-
 private:
     static const int SORTING_GROUPS = 3;
     static const int SORTING_TYPES_PER_GROUP = 2;
     static const int TOTAL_SORTING_METHODS = SORTING_GROUPS * SORTING_TYPES_PER_GROUP;
-
+    GradeLacerController* controllerInstance;
     vector<string> sortingGroup = {"Name", "Classif.", "Grade"};
     vector<string> sortingTypes = {"Ascending", "Descending"};
     string* radioSortingLabels[TOTAL_SORTING_METHODS];
@@ -74,11 +79,13 @@ public:
     static void cbAddStudent(Fl_Widget* widget, void* data);
     static void cbDeleteStudent(Fl_Widget* widget, void* data);
 
+    void loadFileData();
+    void saveFileData();
+
     ClassRosterWindow::SortOrder getSortOrder() const;
 
     void setSummaryText(const string& outputText);
 };
-
 }
 
 #endif // CLASSROSTERWINDOW_H

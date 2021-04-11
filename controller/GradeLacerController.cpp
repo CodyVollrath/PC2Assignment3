@@ -1,14 +1,23 @@
 #include "GradeLacerController.h"
-namespace model
+
+namespace controller
 {
 GradeLacerController::GradeLacerController()
 {
-    //ctor
+    this->parser = new CSVParser();
 }
 
 GradeLacerController::~GradeLacerController()
 {
     //dtor
+}
+
+string GradeLacerController::getFileData(const string& fileName) const
+{
+    FileLoader loader(fileName);
+    string csvData = loader.loadFile();
+    this->parser->getLinkedList(csvData);
+    return "";
 }
 }
 

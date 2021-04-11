@@ -9,6 +9,7 @@
 
 #define DIAGNOSTIC_OUTPUT
 
+
 #ifdef DIAGNOSTIC_OUTPUT
 #include <iostream>
 #endif
@@ -29,7 +30,7 @@ namespace view
 ClassRosterWindow::ClassRosterWindow(int width, int height, const char* title) : Fl_Window(width, height, title)
 {
     begin();
-
+    this->controllerInstance = new GradeLacerController();
     this->sortingOutputLabel = new Fl_Output(120, 25, 0, 0, "Sorting order:");
     createAndDisplaySortingRadioButtons();
 
@@ -141,7 +142,7 @@ void ClassRosterWindow::cbLoad(Fl_Widget* widget, void* data)
 {
     ClassRosterWindow* window = (ClassRosterWindow*)data;
     window->promptUserForFilename(Fl_File_Chooser::SINGLE, "Class roster file to load");
-
+    window->loadFileData();
 #ifdef DIAGNOSTIC_OUTPUT
     cout << "Filename selected: " << window->getFilename() << endl;
 #endif
@@ -307,6 +308,11 @@ void ClassRosterWindow::setSortOrderBasedOnSelection()
     }
 }
 
+void ClassRosterWindow::loadFileData()
+{
+    string value = this->controllerInstance->getFileData(this->getFilename());
+    cout << value << endl;
+}
 //
 // Sets the summary test to display in the class roster summary output
 //
@@ -353,6 +359,7 @@ ClassRosterWindow::~ClassRosterWindow()
     delete this->loadButton;
     delete this->saveButton;
     delete this->addButton;
+    delete this->controllerInstance;
     delete this->deleteButton;
 }
 
