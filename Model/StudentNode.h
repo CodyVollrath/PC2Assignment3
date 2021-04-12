@@ -11,7 +11,7 @@ class StudentNode
         virtual ~StudentNode();
         StudentNode* getNext() const;
         void setNext(StudentNode* nextStudentNode);
-
+        Student getStudent() const;
     protected:
 
     private:

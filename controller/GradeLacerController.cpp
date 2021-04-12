@@ -5,7 +5,8 @@ namespace controller
 GradeLacerController::GradeLacerController()
 {
     this->parser = new CSVParser();
-    this->students = 0;
+    this->students = new InterlacedStudentList();
+
 }
 
 GradeLacerController::~GradeLacerController()
@@ -16,15 +17,21 @@ GradeLacerController::~GradeLacerController()
     if (this->students) {
         delete this->students;
     }
+
     this->parser = 0;
     this->students = 0;
 }
 
-void GradeLacerController::createStudentCollection(const string& fileName) const
+void GradeLacerController::createStudentCollection(const string& fileName)
 {
     FileLoader loader(fileName);
     string csvData = loader.loadFile();
     vector<Student> values(this->parser->getStudents(csvData));
+    for (vector<Student>::size_type i = 0; i < values.size(); i++) {
+        this->students->insert(new StudentNode(&values.at(i)));
+    }
+    this->students->print();
 }
+
 }
 

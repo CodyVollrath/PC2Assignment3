@@ -19,14 +19,12 @@ StudentNode* StudentNode::getNext() const
 
 void StudentNode::setNext(StudentNode* nextStudentNode)
 {
-    if (this->nextNameStudentNode) {
-        delete this->nextNameStudentNode;
-    }
-
-    this->nextNameStudentNode = 0;
-
     this->nextNameStudentNode = nextStudentNode;
 }
 
+Student StudentNode::getStudent() const
+{
+    return *this->currentStudent;
+}
 }
 

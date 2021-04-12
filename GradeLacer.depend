@@ -233,7 +233,7 @@
 	<Fl/Fl_Window.H>
 	<Fl/Fl_Button.H>
 
-1618116658 source:/home/cvollra1/Desktop/GradeLacer/View/ClassRosterWindow.cpp
+1618181431 source:/home/cvollra1/Desktop/GradeLacer/View/ClassRosterWindow.cpp
 	"ClassRosterWindow.h"
 	"DeleteStudentWindow.h"
 	"AddStudentWindow.h"
@@ -257,23 +257,24 @@
 1617931471 source:/home/cvollra1/Desktop/GradeLacer/InterlacedStudentList.cpp
 	"InterlacedStudentList.h"
 
-1618079434 /home/cvollra1/Desktop/GradeLacer/Model/InterlacedStudentList.h
+1618203082 /home/cvollra1/Desktop/GradeLacer/Model/InterlacedStudentList.h
 	"Student.h"
 	"StudentNode.h"
+	<iostream>
 
-1617931697 source:/home/cvollra1/Desktop/GradeLacer/Model/InterlacedStudentList.cpp
+1618201677 source:/home/cvollra1/Desktop/GradeLacer/Model/InterlacedStudentList.cpp
 	"InterlacedStudentList.h"
 
-1617933191 source:/home/cvollra1/Desktop/GradeLacer/Model/StudentNode.cpp
+1618197220 source:/home/cvollra1/Desktop/GradeLacer/Model/StudentNode.cpp
 	"StudentNode.h"
 
-1617933741 /home/cvollra1/Desktop/GradeLacer/Model/StudentNode.h
+1618192258 /home/cvollra1/Desktop/GradeLacer/Model/StudentNode.h
 	"Student.h"
 
-1618116605 source:/home/cvollra1/Desktop/GradeLacer/controller/GradeLacerController.cpp
+1618197068 source:/home/cvollra1/Desktop/GradeLacer/controller/GradeLacerController.cpp
 	"GradeLacerController.h"
 
-1618116786 /home/cvollra1/Desktop/GradeLacer/controller/GradeLacerController.h
+1618181983 /home/cvollra1/Desktop/GradeLacer/controller/GradeLacerController.h
 	<string>
 	"FileLoader.h"
 	"CSVParser.h"
