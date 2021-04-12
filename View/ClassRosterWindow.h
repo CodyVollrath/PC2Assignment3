@@ -80,6 +80,7 @@ public:
     static void cbDeleteStudent(Fl_Widget* widget, void* data);
 
     void loadFileData();
+    void displaySortedList();
     void saveFileData();
 
     ClassRosterWindow::SortOrder getSortOrder() const;

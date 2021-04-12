@@ -70,8 +70,22 @@ void InterlacedStudentList::swapNodes(StudentNode* node1, StudentNode* node2)
         this->root->setNext(tmp);
         return;
     }
+
     StudentNode* tmp = node2->getNext();
     node2->setNext(node1);
     node1->setNext(tmp);
+}
+
+string InterlacedStudentList::generateReport() const
+{
+    string report = "";
+    StudentNode* currNode = this->root;
+    while (currNode) {
+        Student student = currNode->getStudent();
+        report = student.getFirstName() + " " + student.getLastName() + " " + to_string(student.getGrade()) + "\n";
+        currNode = currNode->getNext();
+    }
+    return report;
+
 }
 }

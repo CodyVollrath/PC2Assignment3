@@ -33,5 +33,10 @@ void GradeLacerController::createStudentCollection(const string& fileName)
     this->students->print();
 }
 
+string GradeLacerController::getListByLastName() const
+{
+    return this->students->generateReport();
+}
+
 }
 

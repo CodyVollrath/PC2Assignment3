@@ -112,7 +112,7 @@ void ClassRosterWindow::cbSortingMethodChanged(Fl_Widget* widget, void* data)
 {
     ClassRosterWindow* window = (ClassRosterWindow*)data;
     window->sortingMethodChanged();
-
+    window->displaySortedList();
 #ifdef DIAGNOSTIC_OUTPUT
     cout << "Sorting method: " << window->getSortOrder() << endl;
 #endif
@@ -311,6 +311,11 @@ void ClassRosterWindow::setSortOrderBasedOnSelection()
 void ClassRosterWindow::loadFileData()
 {
     this->controllerInstance->createStudentCollection(this->getFilename());
+}
+
+void ClassRosterWindow::displaySortedList()
+{
+    this->summaryOutputTextBuffer->text(this->controllerInstance->getListByLastName().c_str());
 }
 //
 // Sets the summary test to display in the class roster summary output

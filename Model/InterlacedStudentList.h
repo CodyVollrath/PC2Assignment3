@@ -16,11 +16,13 @@ class InterlacedStudentList
         void insert(StudentNode* node);
         void remove(const string& firstName, const string& lastName);
         void print();
+        string generateReport() const;
     protected:
 
     private:
         StudentNode* root;
         void printList(StudentNode* node);
+        string parseByName(StudentNode* node) const;
         void swapNodes(StudentNode* node1, StudentNode* node2);
         void addNameNode(StudentNode* node);
 
