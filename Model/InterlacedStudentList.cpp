@@ -82,10 +82,10 @@ string InterlacedStudentList::generateReport() const
     StudentNode* currNode = this->root;
     while (currNode) {
         Student student = currNode->getStudent();
-        report = student.getFirstName() + " " + student.getLastName() + " " + to_string(student.getGrade()) + "\n";
+        cout << student.getFirstName() << endl;
+        report += student.getFirstName() + " " + student.getLastName() + " " + to_string(student.getGrade()) + "\n";
         currNode = currNode->getNext();
     }
     return report;
-
 }
 }
