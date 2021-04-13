@@ -18,7 +18,7 @@ class GradeLacerController
         GradeLacerController();
         virtual ~GradeLacerController();
         void createStudentCollection(const string& fileName);
-        string getListByLastName() const;
+        string getReport(int selectionNumber) const;
     protected:
 
     private:

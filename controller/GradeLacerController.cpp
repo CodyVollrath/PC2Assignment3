@@ -30,12 +30,11 @@ void GradeLacerController::createStudentCollection(const string& fileName)
     for (vector<Student>::size_type i = 0; i < values.size(); i++) {
         this->students->insert(new StudentNode(&values.at(i)));
     }
-    this->students->print();
 }
 
-string GradeLacerController::getListByLastName() const
+string GradeLacerController::getReport(int selectionNumber) const
 {
-    return this->students->generateReport();
+    return this->students->generateReport(selectionNumber);
 }
 
 }

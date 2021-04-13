@@ -143,6 +143,7 @@ void ClassRosterWindow::cbLoad(Fl_Widget* widget, void* data)
     ClassRosterWindow* window = (ClassRosterWindow*)data;
     window->promptUserForFilename(Fl_File_Chooser::SINGLE, "Class roster file to load");
     window->loadFileData();
+    window->displaySortedList();
 #ifdef DIAGNOSTIC_OUTPUT
     cout << "Filename selected: " << window->getFilename() << endl;
 #endif
@@ -315,7 +316,7 @@ void ClassRosterWindow::loadFileData()
 
 void ClassRosterWindow::displaySortedList()
 {
-    this->summaryOutputTextBuffer->text(this->controllerInstance->getListByLastName().c_str());
+    this->summaryOutputTextBuffer->text(this->controllerInstance->getReport(this->getSortOrder()).c_str());
 }
 //
 // Sets the summary test to display in the class roster summary output

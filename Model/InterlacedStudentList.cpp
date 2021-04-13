@@ -3,89 +3,165 @@ namespace model
 {
 InterlacedStudentList::InterlacedStudentList()
 {
-    this->root = 0;
+    this->nameHead = 0;
+    this->classificationHead = 0;
+    this->gradeHead = 0;
 }
 
 InterlacedStudentList::~InterlacedStudentList()
 {
-    if (this->root) {
-        delete this->root;
+    if (this->nameHead) {
+        delete this->nameHead;
     }
-    this->root = 0;
+    if (this->classificationHead) {
+        delete this->classificationHead;
+    }
+    if (this->gradeHead) {
+        delete this->gradeHead;
+    }
+    this->nameHead = 0;
+    this->classificationHead = 0;
+    this->gradeHead = 0;
 }
 
 void InterlacedStudentList::insert(StudentNode* node)
 {
     this->addNameNode(node);
-}
-
-void InterlacedStudentList::print()
-{
-    this->printList(this->root);
-}
-
-void InterlacedStudentList::printList(StudentNode* node)
-{
-    if (node) {
-        cout << node->getStudent().getFirstName() << " " << node->getStudent().getLastName() << endl;
-        printList(node->getNext());
-    }
+    this->addClassificationNode(node);
+    this->addGradeNode(node);
 }
 
 void InterlacedStudentList::addNameNode(StudentNode* node)
 {
-    if (!this->root) {
-        this->root = node;
+    if (!this->nameHead || this->nameHead->getStudent().getLastName().compare(node->getStudent().getLastName()) >= 0) {
+        StudentNode* tmp = this->nameHead;
+        node->setNextName(tmp);
+        this->nameHead = node;
         return;
     }
 
-    StudentNode* currNode = this->root;
-
-    string lastNameToBeAdded = node->getStudent().getLastName();
-    string lastNameOfCurrentNode = currNode->getStudent().getLastName();
-
-    if (lastNameToBeAdded.compare(lastNameOfCurrentNode) < 0) {
-        this->swapNodes(node, currNode);
-        return;
+    StudentNode* current = this->nameHead;
+    while (current->getNextName() && current->getNextName()->getStudent().getLastName().compare(node->getStudent().getLastName()) < 0) {
+        current = current->getNextName();
     }
-
-    while (currNode->getNext()) {
-        string lastNameOfNextNode = currNode->getNext()->getStudent().getLastName();
-        if (lastNameToBeAdded.compare(lastNameOfNextNode) < 0) {
-            this->swapNodes(node, currNode);
-            return;
-
-        } else {
-            currNode = currNode->getNext();
-        }
-    }
-    currNode->setNext(node);
+    node->setNextName(current->getNextName());
+    current->setNextName(node);
 }
 
-void InterlacedStudentList::swapNodes(StudentNode* node1, StudentNode* node2)
+void InterlacedStudentList::addClassificationNode(StudentNode* node)
 {
-    if (node2 == this->root) {
-        StudentNode* tmp = node2;
-        this->root = node1;
-        this->root->setNext(tmp);
+    if (!this->classificationHead || this->classificationHead->getStudent().getClassification() >= node->getStudent().getClassification()) {
+        StudentNode* tmp = this->classificationHead;
+        node->setNextClassification(tmp);
+        this->classificationHead = node;
         return;
     }
-
-    StudentNode* tmp = node2->getNext();
-    node2->setNext(node1);
-    node1->setNext(tmp);
+    StudentNode* current = this->classificationHead;
+    while (current->getNextClassification() && current->getNextClassification()->getStudent().getClassification() < node->getStudent().getClassification()) {
+        current = current->getNextClassification();
+    }
+    node->setNextClassification(current->getNextClassification());
+    current->setNextClassification(node);
 }
 
-string InterlacedStudentList::generateReport() const
+void InterlacedStudentList::addGradeNode(StudentNode* node)
 {
-    string report = "";
-    StudentNode* currNode = this->root;
-    while (currNode) {
-        Student student = currNode->getStudent();
-        cout << student.getFirstName() << endl;
-        report += student.getFirstName() + " " + student.getLastName() + " " + to_string(student.getGrade()) + "\n";
-        currNode = currNode->getNext();
+    if (!this->gradeHead || this->gradeHead->getStudent().getGrade() >= node->getStudent().getGrade()) {
+        StudentNode* tmp = this->gradeHead;
+        node->setNextGrade(tmp);
+        this->gradeHead = node;
+        return;
     }
-    return report;
+    StudentNode* current = this->gradeHead;
+    while (current->getNextGrade() && current->getNextGrade()->getStudent().getGrade() < node->getStudent().getGrade()) {
+        current = current->getNextGrade();
+    }
+    node->setNextGrade(current->getNextGrade());
+    current->setNextGrade(node);
+}
+
+string InterlacedStudentList::generateReport(int selectionNumber) const
+{
+    switch (selectionNumber){
+        case 0: return this->getReportByLastName(this->nameHead);
+        break;
+        case 1: return this->getReportByLastNameDesc(this->nameHead);
+        break;
+        case 2: return this->getReportByClassification(this->classificationHead);
+        break;
+        case 3: return this->getReportByClassificationDesc(this->classificationHead);
+        break;
+        case 4: return this->getReportByGrade(this->gradeHead);
+        break;
+        case 5: return this->getReportByGradeDesc(this->gradeHead);
+        default: return "";
+        break;
+    }
+}
+
+string InterlacedStudentList::getReportByLastName(StudentNode* node) const
+{
+    if (!node){
+        return "";
+    } else {
+        Student student = node->getStudent();
+        return student.getFirstName() + " " + student.getLastName() + " " + to_string(student.getClassification()) + " " +  to_string(student.getGrade()) + "\n" + this->getReportByLastName(node->getNextName());
+    }
+}
+
+string InterlacedStudentList::getReportByClassification(StudentNode* node) const
+{
+    if (!node){
+        return "";
+    } else {
+        Student student = node->getStudent();
+        return student.getFirstName() + " " + student.getLastName() + " " + to_string(student.getClassification()) + " " +  to_string(student.getGrade()) + "\n" + this->getReportByClassification(node->getNextClassification());
+    }
+}
+
+string InterlacedStudentList::getReportByGrade(StudentNode* node) const
+{
+    if (!node){
+        return "";
+    } else {
+        Student student = node->getStudent();
+        return student.getFirstName() + " " + student.getLastName() + " " + to_string(student.getClassification()) + " " +  to_string(student.getGrade()) + "\n" + this->getReportByGrade(node->getNextGrade());
+    }
+}
+
+string InterlacedStudentList::getReportByLastNameDesc(StudentNode* node) const
+{
+    if (!node) {
+        return "";
+    } else {
+        string item = this->getReportByLastNameDesc(node->getNextName());
+        Student student = node->getStudent();
+        item += student.getFirstName() + " " + student.getLastName() + " " + to_string(student.getClassification()) + " " +  to_string(student.getGrade()) + "\n";
+        return item;
+    }
+}
+
+string InterlacedStudentList::getReportByClassificationDesc(StudentNode* node) const
+{
+    if (!node) {
+        return "";
+    } else {
+        string item = this->getReportByClassificationDesc(node->getNextClassification());
+        Student student = node->getStudent();
+        item += student.getFirstName() + " " + student.getLastName() + " " + to_string(student.getClassification()) + " " +  to_string(student.getGrade()) + "\n";
+        return item;
+    }
+}
+
+string InterlacedStudentList::getReportByGradeDesc(StudentNode* node) const
+{
+    if (!node) {
+        return "";
+    } else {
+        string item = this->getReportByGradeDesc(node->getNextGrade());
+        Student student = node->getStudent();
+        item += student.getFirstName() + " " + student.getLastName() + " " + to_string(student.getClassification()) + " " +  to_string(student.getGrade()) + "\n";
+        return item;
+    }
 }
 }

@@ -13,18 +13,30 @@ class InterlacedStudentList
     public:
         InterlacedStudentList();
         virtual ~InterlacedStudentList();
+
         void insert(StudentNode* node);
         void remove(const string& firstName, const string& lastName);
-        void print();
-        string generateReport() const;
+        string generateReport(int selectionNumber) const;
     protected:
 
     private:
-        StudentNode* root;
-        void printList(StudentNode* node);
+        StudentNode* nameHead;
+        StudentNode* classificationHead;
+        StudentNode* gradeHead;
         string parseByName(StudentNode* node) const;
-        void swapNodes(StudentNode* node1, StudentNode* node2);
+
         void addNameNode(StudentNode* node);
+        void addClassificationNode(StudentNode* node);
+        void addGradeNode(StudentNode* node);
+
+        string getReportByLastName(StudentNode* node) const;
+        string getReportByLastNameDesc(StudentNode* node) const;
+
+        string getReportByGrade(StudentNode* node) const;
+        string getReportByGradeDesc(StudentNode* node) const;
+
+        string getReportByClassification(StudentNode* node) const;
+        string getReportByClassificationDesc(StudentNode* node) const;
 
 };
 }

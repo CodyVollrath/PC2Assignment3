@@ -5,6 +5,8 @@ StudentNode::StudentNode(Student* student)
 {
     this->currentStudent = student;
     this->nextNameStudentNode = 0;
+    this->nextClassificationStudentNode = 0;
+    this->nextGradeStudentNode = 0;
 }
 
 StudentNode::~StudentNode()
@@ -12,14 +14,34 @@ StudentNode::~StudentNode()
     //dtor
 }
 
-StudentNode* StudentNode::getNext() const
+StudentNode* StudentNode::getNextName() const
 {
     return this->nextNameStudentNode;
 }
 
-void StudentNode::setNext(StudentNode* nextStudentNode)
+StudentNode* StudentNode::getNextClassification() const
+{
+    return this->nextClassificationStudentNode;
+}
+
+StudentNode* StudentNode::getNextGrade() const
+{
+    return this->nextGradeStudentNode;
+}
+
+void StudentNode::setNextName(StudentNode* nextStudentNode)
 {
     this->nextNameStudentNode = nextStudentNode;
+}
+
+void StudentNode::setNextClassification(StudentNode* nextStudentNode)
+{
+    this->nextClassificationStudentNode = nextStudentNode;
+}
+
+void StudentNode::setNextGrade(StudentNode* nextStudentNode)
+{
+    this->nextGradeStudentNode = nextStudentNode;
 }
 
 Student StudentNode::getStudent() const
