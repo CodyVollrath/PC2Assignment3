@@ -31,17 +31,11 @@ GradeLacerController::~GradeLacerController()
 
 void GradeLacerController::createStudentCollection(const string& fileName)
 {
-    if (this->students) {
-        delete this->students;
-    }
-    this->students = new InterlacedStudentList();
-
     FileLoader loader(fileName);
     string csvData = loader.loadFile();
-    this->parser->addStudentsFromFile(csvData);
-    vector<Student>* students = this->parser->getStudents();
-    for (vector<Student>::size_type i = 0; i < students->size(); i++) {
-        StudentNode* node = new StudentNode(&students->at(i));
+    vector<Student> studentsList = this->parser->addStudentsFromFile(csvData);
+    for (vector<Student>::size_type i = 0; i < studentsList.size(); i++) {
+        StudentNode* node = new StudentNode(&studentsList.at(i));
         this->students->insert(node);
     }
 }
@@ -71,6 +65,12 @@ void GradeLacerController::writeDataToOutfile(const string& outfile, const strin
     FileSaver saver(outfile);
     saver.write(data);
 }
-
+void GradeLacerController::clear()
+{
+    if (this->students) {
+        delete this->students;
+    }
+    this->students = new InterlacedStudentList();
+}
 }
 

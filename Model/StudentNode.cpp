@@ -3,7 +3,7 @@ namespace model
 {
 StudentNode::StudentNode(Student* student)
 {
-    this->currentStudent = student;
+    this->currentStudent = new Student(student->getFirstName(), student->getLastName(), student->getClassification(), student->getGrade());
     this->nextNameStudentNode = 0;
     this->nextClassificationStudentNode = 0;
     this->nextGradeStudentNode = 0;
@@ -11,7 +11,10 @@ StudentNode::StudentNode(Student* student)
 
 StudentNode::~StudentNode()
 {
-    //TODO getting invalid pointer exception research this and ask Dr.Yoder
+    if (this->currentStudent) {
+        delete this->currentStudent;
+    }
+    this->currentStudent = 0;
 }
 
 StudentNode* StudentNode::getNextName() const

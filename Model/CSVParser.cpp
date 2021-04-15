@@ -3,26 +3,16 @@ namespace model
 {
 CSVParser::CSVParser()
 {
-    this->students = 0;
+
 }
 
 CSVParser::~CSVParser()
 {
-    if (this->students) {
-        delete this->students;
-    }
-    this->students = 0;
 }
-vector<Student>* CSVParser::getStudents()
+
+vector<Student> CSVParser::addStudentsFromFile(const string& csvData) const
 {
-    return this->students;
-}
-void CSVParser::addStudentsFromFile(const string& csvData)
-{
-    if (this->students) {
-        delete this->students;
-    }
-    this->students = new vector<Student>();
+    vector<Student> students;
     vector<string> lines = splitStr(csvData, "\n");
     for (vector<string>::size_type i = 0; i < lines.size()-1; i++) {
         vector<string> field = splitStr(lines[i], ",");
@@ -36,8 +26,9 @@ void CSVParser::addStudentsFromFile(const string& csvData)
         string gradeStr = field[3];
         int grade = stoi(gradeStr);
         Student student(firstName, lastName, classification, grade);
-        this->students->push_back(student);
+        students.push_back(student);
     }
+    return students;
 }
 
 Student::Classification CSVParser::getClassification(const string& classification) const

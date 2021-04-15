@@ -26,6 +26,7 @@ class GradeLacerController
         void addStudent(Student* student);
         void removeStudent(const string& firstName, const string& lastName);
         void writeDataToOutfile(const string& outfile, const string& data);
+        void clear();
     protected:
 
     private:
