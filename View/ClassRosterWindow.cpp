@@ -209,7 +209,8 @@ void ClassRosterWindow::cbSave(Fl_Widget* widget, void* data)
 {
     ClassRosterWindow* window = (ClassRosterWindow*)data;
     window->promptUserForFilename(Fl_File_Chooser::CREATE, "Class roster file to save to");
-
+    string dataToSave = window->summaryOutputTextBuffer->text();
+    window->controllerInstance->writeDataToOutfile(window->getFilename(), dataToSave);
 #ifdef DIAGNOSTIC_OUTPUT
     cout << "Filename selected: " << window->getFilename() << endl;
 #endif
@@ -328,8 +329,7 @@ void ClassRosterWindow::loadFileData()
 void ClassRosterWindow::displaySortedList()
 {
     cout << this->controllerInstance->getReport(this->getSortOrder()) << endl;
-    this->controllerInstance->print();
-    this->summaryOutputTextBuffer->text(this->controllerInstance->getReport(this->getSortOrder()).c_str());
+    this->setSummaryText(this->controllerInstance->getReport(this->getSortOrder()));
 }
 //
 // Sets the summary test to display in the class roster summary output

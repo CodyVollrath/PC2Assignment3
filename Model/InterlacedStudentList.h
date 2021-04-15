@@ -3,7 +3,9 @@
 #include "Student.h"
 #include "StudentNode.h"
 #include "Utils.h"
+
 #include <iostream>
+#include <vector>
 using namespace std;
 
 namespace model
@@ -17,7 +19,6 @@ class InterlacedStudentList
         void insert(StudentNode* node);
         void remove(const string& firstName, const string& lastName);
         string generateReport(int selectionNumber) const;
-        void print();
 
     protected:
 
@@ -30,12 +31,9 @@ class InterlacedStudentList
         void addNameNode(StudentNode* node);
         void addClassificationNode(StudentNode* node);
         void addGradeNode(StudentNode* node);
-        void printName(StudentNode* node);
         void removeNameNode(StudentNode** head_ref, const string& firstName, const string& lastName);
         void removeClassificationNode(StudentNode** head_ref,const string& firstName, const string& lastName);
         void removeGradeNode(StudentNode** head_ref,const string& firstName, const string& lastName);
-
-
 
         string getReportByLastName(StudentNode* node) const;
         string getReportByLastNameDesc(StudentNode* node) const;
@@ -45,7 +43,6 @@ class InterlacedStudentList
 
         string getReportByClassification(StudentNode* node) const;
         string getReportByClassificationDesc(StudentNode* node) const;
-
 };
 }
 

@@ -5,10 +5,14 @@
 using namespace std;
 
 #include "FileLoader.h"
+#include "FileSaver.h"
 using namespace datatier;
 
 #include "CSVParser.h"
 using namespace model;
+
+#include "Formatter.h"
+using namespace outputformatter;
 
 namespace controller
 {
@@ -21,12 +25,14 @@ class GradeLacerController
         string getReport(int selectionNumber) const;
         void addStudent(Student* student);
         void removeStudent(const string& firstName, const string& lastName);
-        void print();
+        void writeDataToOutfile(const string& outfile, const string& data);
     protected:
 
     private:
         CSVParser* parser;
         InterlacedStudentList* students;
+        Formatter* outputFormatter;
+        void generateReport();
 };
 }
 

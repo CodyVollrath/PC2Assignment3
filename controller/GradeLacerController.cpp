@@ -6,6 +6,7 @@ GradeLacerController::GradeLacerController()
 {
     this->parser = new CSVParser();
     this->students = new InterlacedStudentList();
+    this->outputFormatter = new Formatter();
 
 }
 
@@ -14,16 +15,27 @@ GradeLacerController::~GradeLacerController()
     if (this->parser) {
         delete this->parser;
     }
+
     if (this->students) {
         delete this->students;
     }
 
+    if (this->outputFormatter) {
+        delete this->outputFormatter;
+    }
+
     this->parser = 0;
     this->students = 0;
+    this->outputFormatter = 0;
 }
 
 void GradeLacerController::createStudentCollection(const string& fileName)
 {
+    if (this->students) {
+        delete this->students;
+    }
+    this->students = new InterlacedStudentList();
+
     FileLoader loader(fileName);
     string csvData = loader.loadFile();
     this->parser->addStudentsFromFile(csvData);
@@ -51,8 +63,13 @@ string GradeLacerController::getReport(int selectionNumber) const
     return this->students->generateReport(selectionNumber);
 }
 
-void GradeLacerController::print() {
-    return this->students->print();
+void GradeLacerController::writeDataToOutfile(const string& outfile, const string& data)
+{
+    if (outfile == "") {
+        return;
+    }
+    FileSaver saver(outfile);
+    saver.write(data);
 }
 
 }

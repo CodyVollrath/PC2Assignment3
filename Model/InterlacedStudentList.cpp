@@ -54,6 +54,9 @@ void InterlacedStudentList::removeNameNode(StudentNode** head_ref, const string&
     while (tmp && (toUpperCase(student->getFirstName()) != firstName || toUpperCase(student->getLastName()) != lastName)) {
         prev = tmp;
         tmp = tmp->getNextName();
+        if (!tmp) {
+           break;
+        }
         student = tmp->getStudent();
     }
 
@@ -75,6 +78,9 @@ void InterlacedStudentList::removeClassificationNode(StudentNode** head_ref, con
     while (tmp && (toUpperCase(student->getFirstName()) != firstName || toUpperCase(student->getLastName()) != lastName)) {
         prev = tmp;
         tmp = tmp->getNextClassification();
+        if (!tmp) {
+           break;
+        }
         student = tmp->getStudent();
     }
 
@@ -97,7 +103,11 @@ void InterlacedStudentList::removeGradeNode(StudentNode** head_ref, const string
     while (tmp && (toUpperCase(student->getFirstName()) != firstName || toUpperCase(student->getLastName()) != lastName)) {
         prev = tmp;
         tmp = tmp->getNextGrade();
+        if (!tmp) {
+           break;
+        }
         student = tmp->getStudent();
+
     }
 
     if (!tmp) {
@@ -155,10 +165,6 @@ void InterlacedStudentList::addGradeNode(StudentNode* node)
     node->setNextGrade(current->getNextGrade());
     current->setNextGrade(node);
 }
-void InterlacedStudentList::print()
-{
-    this->printName(this->nameHead);
-}
 string InterlacedStudentList::generateReport(int selectionNumber) const
 {
     switch (selectionNumber){
@@ -184,7 +190,7 @@ string InterlacedStudentList::getReportByLastName(StudentNode* node) const
         return "";
     } else {
         Student* student = node->getStudent();
-        return student->getFirstName() + " " + student->getLastName() + " " + to_string(student->getClassification()) + " " +  to_string(student->getGrade()) + "\n" + this->getReportByLastName(node->getNextName());
+        return student->getFirstName() + " " + student->getLastName() + " " + getClassification(student->getClassification()) + " " +  to_string(student->getGrade()) + "\n" + this->getReportByLastName(node->getNextName());
     }
 }
 
@@ -194,7 +200,7 @@ string InterlacedStudentList::getReportByClassification(StudentNode* node) const
         return "";
     } else {
         Student* student = node->getStudent();
-        return student->getFirstName() + " " + student->getLastName() + " " + to_string(student->getClassification()) + " " +  to_string(student->getGrade()) + "\n" + this->getReportByClassification(node->getNextClassification());
+        return student->getFirstName() + " " + student->getLastName() + " " + getClassification(student->getClassification()) + " " +  to_string(student->getGrade()) + "\n" + this->getReportByClassification(node->getNextClassification());
     }
 }
 
@@ -204,7 +210,7 @@ string InterlacedStudentList::getReportByGrade(StudentNode* node) const
         return "";
     } else {
         Student* student = node->getStudent();
-        return student->getFirstName() + " " + student->getLastName() + " " + to_string(student->getClassification()) + " " +  to_string(student->getGrade()) + "\n" + this->getReportByGrade(node->getNextGrade());
+        return student->getFirstName() + " " + student->getLastName() + " " + getClassification(student->getClassification()) + " " +  to_string(student->getGrade()) + "\n" + this->getReportByGrade(node->getNextGrade());
     }
 }
 
@@ -215,7 +221,7 @@ string InterlacedStudentList::getReportByLastNameDesc(StudentNode* node) const
     } else {
         string item = this->getReportByLastNameDesc(node->getNextName());
         Student* student = node->getStudent();
-        item += student->getFirstName() + " " + student->getLastName() + " " + to_string(student->getClassification()) + " " +  to_string(student->getGrade()) + "\n";
+        item += student->getFirstName() + " " + student->getLastName() + " " + getClassification(student->getClassification()) + " " +  to_string(student->getGrade()) + "\n";
 
         return item;
     }
@@ -228,7 +234,7 @@ string InterlacedStudentList::getReportByClassificationDesc(StudentNode* node) c
     } else {
         string item = this->getReportByClassificationDesc(node->getNextClassification());
         Student* student = node->getStudent();
-        item += student->getFirstName() + " " + student->getLastName() + " " + to_string(student->getClassification()) + " " +  to_string(student->getGrade()) + "\n";
+        item += student->getFirstName() + " " + student->getLastName() + " " + getClassification(student->getClassification()) + " " +  to_string(student->getGrade()) + "\n";
         return item;
     }
 }
@@ -240,16 +246,8 @@ string InterlacedStudentList::getReportByGradeDesc(StudentNode* node) const
     } else {
         string item = this->getReportByGradeDesc(node->getNextGrade());
         Student* student = node->getStudent();
-        item += student->getFirstName() + " " + student->getLastName() + " " + to_string(student->getClassification()) + " " +  to_string(student->getGrade()) + "\n";
+        item += student->getFirstName() + " " + student->getLastName() + " " + getClassification(student->getClassification()) + " " +  to_string(student->getGrade()) + "\n";
         return item;
-    }
-}
-
-void InterlacedStudentList::printName(StudentNode* node)
-{
-    if (node) {
-        cout << node->getStudent()->getFirstName() << endl;
-        printName(node->getNextName());
     }
 }
 }

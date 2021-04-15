@@ -11,7 +11,7 @@ StudentNode::StudentNode(Student* student)
 
 StudentNode::~StudentNode()
 {
-    //dtor
+    //TODO getting invalid pointer exception research this and ask Dr.Yoder
 }
 
 StudentNode* StudentNode::getNextName() const

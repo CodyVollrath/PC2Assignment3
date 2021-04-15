@@ -30,3 +30,17 @@ const vector<string> splitStr(string value, const string delimiter)
     elements.push_back(token);
     return elements;
 }
+
+const string getClassification(int classification) {
+    switch(classification){
+        case 0: return "DUALENROLLMENT";
+        break;
+        case 1: return "UNDERGRAD";
+        break;
+        case 2: return "GRADE";
+        break;
+        case 3: return "POSTDOC";
+        break;
+        default: return "UNKNOWN";
+    }
+}
