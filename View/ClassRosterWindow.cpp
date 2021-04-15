@@ -279,6 +279,11 @@ void ClassRosterWindow::cbDeleteStudent(Fl_Widget* widget, void* data)
         Fl::wait();
     }
 
+    if (deleteStudent.getWindowResult() == OKCancelWindow::WindowResult::OK)
+    {
+        window->controllerInstance->removeStudent(deleteStudent.getFirstName(), deleteStudent.getLastName());
+    }
+
 #ifdef DIAGNOSTIC_OUTPUT
     if (deleteStudent.getWindowResult() == OKCancelWindow::WindowResult::OK)
     {
@@ -316,6 +321,8 @@ void ClassRosterWindow::loadFileData()
 
 void ClassRosterWindow::displaySortedList()
 {
+    cout << this->controllerInstance->getReport(this->getSortOrder()) << endl;
+    this->controllerInstance->print();
     this->summaryOutputTextBuffer->text(this->controllerInstance->getReport(this->getSortOrder()).c_str());
 }
 //

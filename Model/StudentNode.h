@@ -17,7 +17,7 @@ class StudentNode
         void setNextName(StudentNode* nextStudentNode);
         void setNextClassification(StudentNode* nextStudentNode);
         void setNextGrade(StudentNode* nextStudentNode);
-        Student getStudent() const;
+        Student* getStudent() const;
     protected:
 
     private:

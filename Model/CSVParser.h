@@ -18,12 +18,15 @@ class CSVParser
     public:
         CSVParser();
         virtual ~CSVParser();
-        vector<Student> getStudents(const string& csvData) const;
+        vector<Student>* getStudents();
+        void addStudentsFromFile(const string& csvData);
+
 
     protected:
 
     private:
         Student::Classification getClassification(const string& classification) const;
+        vector<Student>* students;
 };
 }
 

@@ -44,9 +44,9 @@ void StudentNode::setNextGrade(StudentNode* nextStudentNode)
     this->nextGradeStudentNode = nextStudentNode;
 }
 
-Student StudentNode::getStudent() const
+Student* StudentNode::getStudent() const
 {
-    return *this->currentStudent;
+    return this->currentStudent;
 }
 }
 

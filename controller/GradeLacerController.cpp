@@ -26,15 +26,28 @@ void GradeLacerController::createStudentCollection(const string& fileName)
 {
     FileLoader loader(fileName);
     string csvData = loader.loadFile();
-    vector<Student> values(this->parser->getStudents(csvData));
-    for (vector<Student>::size_type i = 0; i < values.size(); i++) {
-        this->students->insert(new StudentNode(&values.at(i)));
+    this->parser->addStudentsFromFile(csvData);
+    vector<Student>* students = this->parser->getStudents();
+    for (vector<Student>::size_type i = 0; i < students->size(); i++) {
+        StudentNode* node = new StudentNode(&students->at(i));
+        this->students->insert(node);
     }
+}
+
+void GradeLacerController::removeStudent(const string& firstName, const string& lastName)
+{
+    string fName = toUpperCase(firstName);
+    string lName = toUpperCase(lastName);
+    this->students->remove(fName,lName);
 }
 
 string GradeLacerController::getReport(int selectionNumber) const
 {
     return this->students->generateReport(selectionNumber);
+}
+
+void GradeLacerController::print() {
+    return this->students->print();
 }
 
 }

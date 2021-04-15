@@ -5,8 +5,12 @@
 
 #include <Fl/Fl_Input.H>
 
+
 #include <string>
 using namespace std;
+
+#include "GradeLacerController.h"
+using namespace controller;
 
 namespace view
 {
