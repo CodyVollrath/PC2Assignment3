@@ -238,6 +238,11 @@ void ClassRosterWindow::cbAddStudent(Fl_Widget* widget, void* data)
         Fl::wait();
     }
 
+    if (addStudent.getWindowResult() == OKCancelWindow::WindowResult::OK){
+        window->controllerInstance->addStudent(addStudent.getStudent());
+    }
+    window->displaySortedList();
+
 #ifdef DIAGNOSTIC_OUTPUT
     // TODO Remove or adapt code below, currently in for demo purposes
     if (addStudent.getWindowResult() == OKCancelWindow::WindowResult::OK)
@@ -283,6 +288,7 @@ void ClassRosterWindow::cbDeleteStudent(Fl_Widget* widget, void* data)
     {
         window->controllerInstance->removeStudent(deleteStudent.getFirstName(), deleteStudent.getLastName());
     }
+    window->displaySortedList();
 
 #ifdef DIAGNOSTIC_OUTPUT
     if (deleteStudent.getWindowResult() == OKCancelWindow::WindowResult::OK)

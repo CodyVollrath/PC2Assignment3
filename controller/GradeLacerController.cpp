@@ -41,6 +41,11 @@ void GradeLacerController::removeStudent(const string& firstName, const string& 
     this->students->remove(fName,lName);
 }
 
+void GradeLacerController::addStudent(Student* student)
+{
+    this->students->insert(new StudentNode(student));
+}
+
 string GradeLacerController::getReport(int selectionNumber) const
 {
     return this->students->generateReport(selectionNumber);
