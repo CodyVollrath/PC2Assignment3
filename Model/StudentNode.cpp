@@ -60,15 +60,6 @@ int StudentNode::compareLastName(StudentNode* other) const
     return this->currentStudent->getLastName().compare(other->getStudent()->getLastName());
 
 }
-
-int StudentNode::compareFirstName(StudentNode* other) const
-{
-    if (!other) {
-        return -2;
-    }
-    return this->currentStudent->getFirstName().compare(other->getStudent()->getFirstName());
-}
-
 int StudentNode::compareClassification(StudentNode* other) const
 {
     if (!other) {
@@ -77,19 +68,6 @@ int StudentNode::compareClassification(StudentNode* other) const
     if (this->currentStudent->getClassification() > other->getStudent()->getClassification()) {
         return 1;
     } else if (this->currentStudent->getClassification() == other->getStudent()->getClassification()) {
-        return 0;
-    }
-    return -1;
-}
-
-int StudentNode::compareGrade(StudentNode* other) const
-{
-    if (!other) {
-        return -2;
-    }
-    if (this->currentStudent->getGrade() > other->getStudent()->getGrade()) {
-        return 1;
-    } else if (this->currentStudent->getGrade() == other->getStudent()->getGrade()) {
         return 0;
     }
     return -1;

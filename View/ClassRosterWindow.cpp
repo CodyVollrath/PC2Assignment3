@@ -143,7 +143,6 @@ void ClassRosterWindow::cbLoad(Fl_Widget* widget, void* data)
 
     ClassRosterWindow* window = (ClassRosterWindow*)data;
     window->promptUserForFilename(Fl_File_Chooser::SINGLE, "Class roster file to load");
-    window->controllerInstance->clear();
     window->loadFileData();
     window->displaySortedList();
 #ifdef DIAGNOSTIC_OUTPUT

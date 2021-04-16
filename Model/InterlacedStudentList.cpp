@@ -113,14 +113,11 @@ void InterlacedStudentList::removeGradeNode(StudentNode** head_ref, const string
 
 void InterlacedStudentList::addNameNode(StudentNode* node)
 {
-
     if (!this->nameHead || this->nameHead->compareLastName(node) > 0) {
         StudentNode* tmp = this->nameHead;
         node->setNextName(tmp);
         this->nameHead = node;
         return;
-    } else if (this->nameHead->compareFirstName(node) > 0) {
-
     }
 
     StudentNode* current = this->nameHead;
@@ -133,12 +130,13 @@ void InterlacedStudentList::addNameNode(StudentNode* node)
 
 void InterlacedStudentList::addClassificationNode(StudentNode* node)
 {
-    if (!this->classificationHead || this->classificationHead->compareClassification(node) >= 0) {
+    if (!this->classificationHead || this->classificationHead->compareClassification(node) > 0) {
         StudentNode* tmp = this->classificationHead;
         node->setNextClassification(tmp);
         this->classificationHead = node;
         return;
     }
+
     StudentNode* current = this->classificationHead;
     while (current->getNextClassification() && current->compareClassification(node) < 0) {
         current = current->getNextClassification();
@@ -187,7 +185,8 @@ string InterlacedStudentList::getReportByLastName(StudentNode* node) const
         return "";
     } else {
         Student* student = node->getStudent();
-        return student->getFirstName() + " " + student->getLastName() + " " + getClassification(student->getClassification()) + " " +  to_string(student->getGrade()) + "\n" + this->getReportByLastName(node->getNextName());
+        string item = this->formatItem(student);
+        return item + this->getReportByLastName(node->getNextName());
     }
 }
 
@@ -197,7 +196,8 @@ string InterlacedStudentList::getReportByClassification(StudentNode* node) const
         return "";
     } else {
         Student* student = node->getStudent();
-        return student->getFirstName() + " " + student->getLastName() + " " + getClassification(student->getClassification()) + " " +  to_string(student->getGrade()) + "\n" + this->getReportByClassification(node->getNextClassification());
+        string item = this->formatItem(student);
+        return item + this->getReportByClassification(node->getNextClassification());
     }
 }
 
@@ -207,7 +207,8 @@ string InterlacedStudentList::getReportByGrade(StudentNode* node) const
         return "";
     } else {
         Student* student = node->getStudent();
-        return student->getFirstName() + " " + student->getLastName() + " " + getClassification(student->getClassification()) + " " +  to_string(student->getGrade()) + "\n" + this->getReportByGrade(node->getNextGrade());
+        string item = this->formatItem(student);
+        return item + this->getReportByGrade(node->getNextGrade());
     }
 }
 
@@ -218,8 +219,7 @@ string InterlacedStudentList::getReportByLastNameDesc(StudentNode* node) const
     } else {
         string item = this->getReportByLastNameDesc(node->getNextName());
         Student* student = node->getStudent();
-        item += student->getFirstName() + " " + student->getLastName() + " " + getClassification(student->getClassification()) + " " +  to_string(student->getGrade()) + "\n";
-
+        item += this->formatItem(student);
         return item;
     }
 }
@@ -231,7 +231,7 @@ string InterlacedStudentList::getReportByClassificationDesc(StudentNode* node) c
     } else {
         string item = this->getReportByClassificationDesc(node->getNextClassification());
         Student* student = node->getStudent();
-        item += student->getFirstName() + " " + student->getLastName() + " " + getClassification(student->getClassification()) + " " +  to_string(student->getGrade()) + "\n";
+        item += this->formatItem(student);
         return item;
     }
 }
@@ -243,8 +243,18 @@ string InterlacedStudentList::getReportByGradeDesc(StudentNode* node) const
     } else {
         string item = this->getReportByGradeDesc(node->getNextGrade());
         Student* student = node->getStudent();
-        item += student->getFirstName() + " " + student->getLastName() + " " + getClassification(student->getClassification()) + " " +  to_string(student->getGrade()) + "\n";
+        item += this->formatItem(student);
         return item;
     }
+}
+
+string InterlacedStudentList::formatItem(Student* student) const
+{
+    int width = 20;
+    stringstream item;
+    item << setw(width) << left << student->getFirstName() + " " + student->getLastName() <<
+         setw(width) << left << getClassification(student->getClassification()) <<
+         setw(width) << left <<  to_string(student->getGrade()) << '\n';
+    return item.str();
 }
 }

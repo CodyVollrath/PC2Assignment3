@@ -37,7 +37,7 @@ const string getClassification(int classification) {
         break;
         case 1: return "UNDERGRAD";
         break;
-        case 2: return "GRADE";
+        case 2: return "GRAD";
         break;
         case 3: return "POSTDOC";
         break;

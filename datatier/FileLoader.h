@@ -10,7 +10,7 @@ namespace datatier
 {
 /**
 * The FileLoader deals with reading from files
-* @author Cody Vollrath
+* @author CodyVollrath
 */
 class FileLoader
 {

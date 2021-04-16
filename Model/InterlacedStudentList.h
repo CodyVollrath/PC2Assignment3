@@ -6,20 +6,48 @@
 
 #include <iostream>
 #include <vector>
+#include <bits/stdc++.h>
 using namespace std;
 
 namespace model
 {
+/**
+* InterlacedStudentList keeps track of the students using a laced approach with three laces
+*   name, classification, and grade;
+* @author CodyVollrath
+*/
 class InterlacedStudentList
 {
     public:
+        /**
+        * Constructs the InterlacedStudentList
+        */
         InterlacedStudentList();
+
+        /**
+        * Deconstructs the InterlacedStudentList
+        */
         virtual ~InterlacedStudentList();
 
+        /**
+        * Inserts into the InterlacedStudentList
+        * @param node the StudentNode to be inserted into the list
+        */
         void insert(StudentNode* node);
+
+        /**
+        * Removes from the list by the first and last name
+        * @param firstName the first name of the student
+        * @param lastName the last name of the student
+        */
         void remove(const string& firstName, const string& lastName);
+
+        /**
+        * Gets a report on the list data by the selection sort
+        * @param selectionNumber the selection value which represents the sorted data
+        * @return the report on the list
+        */
         string generateReport(int selectionNumber) const;
-        void clear();
 
     protected:
 
@@ -44,6 +72,8 @@ class InterlacedStudentList
 
         string getReportByClassification(StudentNode* node) const;
         string getReportByClassificationDesc(StudentNode* node) const;
+
+        string formatItem(Student* student) const;
 };
 }
 
