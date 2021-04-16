@@ -10,18 +10,12 @@ InterlacedStudentList::InterlacedStudentList()
 
 InterlacedStudentList::~InterlacedStudentList()
 {
-    if (this->nameHead) {
-        delete this->nameHead;
+    StudentNode* node = this->nameHead;
+    while (node){
+        StudentNode* tmp = node->getNextName();
+        delete node;
+        node = tmp;
     }
-    if (this->classificationHead) {
-        delete this->classificationHead;
-    }
-    if (this->gradeHead) {
-        delete this->gradeHead;
-    }
-    this->nameHead = 0;
-    this->classificationHead = 0;
-    this->gradeHead = 0;
 }
 
 void InterlacedStudentList::insert(StudentNode* node)
@@ -119,15 +113,18 @@ void InterlacedStudentList::removeGradeNode(StudentNode** head_ref, const string
 
 void InterlacedStudentList::addNameNode(StudentNode* node)
 {
-    if (!this->nameHead || this->nameHead->getStudent()->getLastName().compare(node->getStudent()->getLastName()) >= 0) {
+
+    if (!this->nameHead || this->nameHead->compareLastName(node) > 0) {
         StudentNode* tmp = this->nameHead;
         node->setNextName(tmp);
         this->nameHead = node;
         return;
+    } else if (this->nameHead->compareFirstName(node) > 0) {
+
     }
 
     StudentNode* current = this->nameHead;
-    while (current->getNextName() && current->getNextName()->getStudent()->getLastName().compare(node->getStudent()->getLastName()) < 0) {
+    while (current->getNextName() && current->compareLastName(node) < 0) {
         current = current->getNextName();
     }
     node->setNextName(current->getNextName());
@@ -136,14 +133,14 @@ void InterlacedStudentList::addNameNode(StudentNode* node)
 
 void InterlacedStudentList::addClassificationNode(StudentNode* node)
 {
-    if (!this->classificationHead || this->classificationHead->getStudent()->getClassification() >= node->getStudent()->getClassification()) {
+    if (!this->classificationHead || this->classificationHead->compareClassification(node) >= 0) {
         StudentNode* tmp = this->classificationHead;
         node->setNextClassification(tmp);
         this->classificationHead = node;
         return;
     }
     StudentNode* current = this->classificationHead;
-    while (current->getNextClassification() && current->getNextClassification()->getStudent()->getClassification() < node->getStudent()->getClassification()) {
+    while (current->getNextClassification() && current->compareClassification(node) < 0) {
         current = current->getNextClassification();
     }
     node->setNextClassification(current->getNextClassification());

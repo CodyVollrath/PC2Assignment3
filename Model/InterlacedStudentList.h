@@ -19,6 +19,7 @@ class InterlacedStudentList
         void insert(StudentNode* node);
         void remove(const string& firstName, const string& lastName);
         string generateReport(int selectionNumber) const;
+        void clear();
 
     protected:
 

@@ -18,6 +18,10 @@ class StudentNode
         void setNextClassification(StudentNode* nextStudentNode);
         void setNextGrade(StudentNode* nextStudentNode);
         Student* getStudent() const;
+        int compareLastName(StudentNode* other) const;
+        int compareFirstName(StudentNode* other) const;
+        int compareClassification(StudentNode* other) const;
+        int compareGrade(StudentNode* other) const;
     protected:
 
     private:
@@ -25,6 +29,7 @@ class StudentNode
         StudentNode* nextNameStudentNode;
         StudentNode* nextClassificationStudentNode;
         StudentNode* nextGradeStudentNode;
+
 };
 }
 
