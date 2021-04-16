@@ -57,7 +57,9 @@ int StudentNode::compareLastName(StudentNode* other) const
     if (!other) {
         return -2;
     }
-    return this->currentStudent->getLastName().compare(other->getStudent()->getLastName());
+    string lastFirstCurr = this->currentStudent->getLastName() + this->currentStudent->getFirstName();
+    string lastFirstOther = other->getStudent()->getLastName() + other->getStudent()->getFirstName();
+    return lastFirstCurr.compare(lastFirstOther);
 
 }
 int StudentNode::compareClassification(StudentNode* other) const
